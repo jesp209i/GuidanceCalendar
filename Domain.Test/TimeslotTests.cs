@@ -13,8 +13,8 @@ namespace Domain.Test
         [SetUp]
         public void Setup()
         {
-            var startTime = new DateTimeOffset().UtcDateTime;
-            var endTime = new DateTimeOffset().UtcDateTime.AddHours(4);
+            var startTime = DateTime.UtcNow;
+            var endTime = DateTime.UtcNow.AddHours(4);
             testCalendar = new Calendar("Test Calendar");
             testTeacher = new Teacher("Prøveknud");
             testTimeslot = new Timeslot(startTime, endTime, testTeacher, testCalendar);
@@ -29,7 +29,7 @@ namespace Domain.Test
         [Test]
         public void Timeslot_Endtime_Before_Starttime_Throws_Exception()
         {
-            var startTime = new DateTimeOffset().UtcDateTime;
+            var startTime = DateTime.UtcNow;
             Action act = () => new Timeslot(startTime, startTime.AddHours(-1), testTeacher, testCalendar);
             act.Should().Throw<ArgumentException>();
         }
@@ -47,7 +47,7 @@ namespace Domain.Test
             var actual = testTeacher;
             actual.AvailableTimeslots.Should().HaveCount(0, "No available timeslots");
             actual.AddTimeslot(testTimeslot);
-            var ts = new Timeslot(new DateTimeOffset().UtcDateTime, new DateTimeOffset().UtcDateTime.AddMinutes(30), testTeacher, testCalendar);
+            var ts = new Timeslot(DateTime.UtcNow, DateTime.UtcNow.AddMinutes(30), testTeacher, testCalendar);
             Action act = () => actual.AddTimeslot(ts);
             act.Should().Throw<Exception>();
         }
@@ -56,7 +56,8 @@ namespace Domain.Test
         {
             var actual = testTeacher;
             actual.AddTimeslot(testTimeslot);
-            var ts = new Timeslot(new DateTimeOffset().UtcDateTime.AddDays(1), new DateTimeOffset().UtcDateTime.AddDays(1).AddMinutes(30), testTeacher, testCalendar);
+            var goodtime = DateTime.UtcNow.AddDays(1);
+            var ts = new Timeslot(goodtime, goodtime.AddMinutes(30), testTeacher, testCalendar);
             actual.AddTimeslot(ts);
             actual.AvailableTimeslots.Should().HaveCount(2, "Two timeslots on teacher");
         }
@@ -64,7 +65,7 @@ namespace Domain.Test
         public void Teacher_Has_Two_Timeslots_Second_Added_Before_First()
         {
             var actual = testTeacher;
-            var time = new DateTimeOffset().UtcDateTime;
+            var time = DateTime.UtcNow;
             var ts = new Timeslot(time.AddDays(2), time.AddHours(50), testTeacher, testCalendar);
             actual.AddTimeslot(ts);
             var ts2 = new Timeslot(time.AddDays(1), time.AddHours(26), testTeacher, testCalendar);
@@ -78,6 +79,39 @@ namespace Domain.Test
             var notTestCalendar = new Calendar("not test calendar");
             actual.Calendar.Should().Be(testCalendar);
             actual.Calendar.Should().NotBe(notTestCalendar);
+        }
+        [Test]
+        public void Timeslot_No_Overlapping_Bookings()
+        {
+            var actual = testTimeslot;
+            var bookingtime = DateTime.UtcNow;
+            var testStudent = new Student("Bobby Bingo");
+
+            var testbooking = new Booking(testStudent,bookingtime, bookingtime.AddMinutes(30));
+            actual.AddBooking(testbooking);
+            var testBooking2 = new Booking(testStudent, bookingtime.AddMinutes(5), bookingtime.AddMinutes(35));
+            Action act = () => actual.AddBooking(testBooking2);
+            act.Should().Throw<Exception>();
+        }
+        [Test]
+        public void Student_Max_Two_Open_Bookings()
+        {
+            var actual = testTimeslot;
+            var bookingtime = DateTime.UtcNow;
+            var testStudent = new Student("Bobby Bingo");
+            var testStudent2 = new Student("Britta Nielsen");
+
+            var testbooking = new Booking(testStudent, bookingtime.AddMinutes(2), bookingtime.AddMinutes(15));
+            actual.AddBooking(testbooking);
+            var testBooking2 = new Booking(testStudent, bookingtime.AddMinutes(16), bookingtime.AddMinutes(31));
+            actual.AddBooking(testBooking2);
+            var testBooking3 = new Booking(testStudent, bookingtime.AddMinutes(32), bookingtime.AddMinutes(48));
+            var testBooking4 = new Booking(testStudent2, bookingtime.AddMinutes(32), bookingtime.AddMinutes(48));
+            Action act = () => actual.AddBooking(testBooking3);
+            act.Should().Throw<Exception>();
+            actual.Bookings.Should().HaveCount(2);
+            actual.AddBooking(testBooking4);
+            actual.Bookings.Should().HaveCount(3);
         }
     }
 }
