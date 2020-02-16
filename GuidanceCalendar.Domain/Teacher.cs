@@ -23,9 +23,9 @@ namespace GuidanceCalendar.Domain
         }
         private void OverlapGuard(Timeslot timeslot)
         {
-            if (AvailableTimeslots.Any(ts => ts.Overlap(timeslot)))
+            foreach(var ts in AvailableTimeslots)
             {
-                throw new Exception();
+                ts.OverlapGuard(timeslot);
             }
         }
     }
