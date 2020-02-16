@@ -15,5 +15,9 @@ namespace GuidanceCalendar.Domain
             Name = name;
             Description = description;
         }
+        public Calendar()
+        {
+
+        }
     }
 }

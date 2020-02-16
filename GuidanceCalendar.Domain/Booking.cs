@@ -6,6 +6,10 @@ namespace GuidanceCalendar.Domain
     public class Booking : TimeRange
     {
         public Student BookedBy { get; private set; }
+        public Booking()
+        {
+
+        }
         public Booking(Student booker, DateTimeOffset startTime, DateTimeOffset endTime)
         {
             BookedBy = booker;

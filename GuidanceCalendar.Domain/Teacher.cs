@@ -28,5 +28,9 @@ namespace GuidanceCalendar.Domain
                 ts.OverlapGuard(timeslot);
             }
         }
+        public Teacher()
+        {
+
+        }
     }
 }

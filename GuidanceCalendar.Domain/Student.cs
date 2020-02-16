@@ -29,6 +29,10 @@ namespace GuidanceCalendar.Domain
         {
             return Bookings.Where(b => b.StartTime > ThisMoment()).ToList();
         }
+        public Student()
+        {
+
+        }
 
     }
 }

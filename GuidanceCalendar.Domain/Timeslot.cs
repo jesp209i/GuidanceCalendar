@@ -11,6 +11,10 @@ namespace GuidanceCalendar.Domain
         public ICollection<Booking> Bookings { get; private set; }
         public Teacher TimeslotOwner { get; private set; }
         public Calendar Calendar { get; set; }
+        public Timeslot()
+        {
+
+        }
         public Timeslot(DateTimeOffset startTime, DateTimeOffset endTime, Teacher owner, Calendar calendar)
         {
             Bookings = new List<Booking>();
