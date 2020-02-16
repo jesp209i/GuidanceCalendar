@@ -11,13 +11,15 @@ namespace GuidanceCalendar.API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        public void CreateBooking()
+        [HttpPost]
+        public async Task<IActionResult> CreateBooking()
         {
-
+            throw new NotImplementedException();
         }
-        public void PlannedBookings()
+        [HttpGet]
+        public async Task<IActionResult> PlannedBookings()
         {
-
+            throw new NotImplementedException();
         }
     }
 }
