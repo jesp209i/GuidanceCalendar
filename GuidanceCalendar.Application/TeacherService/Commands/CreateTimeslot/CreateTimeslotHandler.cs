@@ -24,7 +24,7 @@ namespace GuidanceCalendar.Application.TeacherService.Commands.CreateTimeslot
         }
         public async Task<CreateTimeslotResponse> Handle(CreateTimeslotCommand request, CancellationToken cancellationToken)
         {
-            var teacher = await teacherRepository.GetByIdAsync(request.TeacherId);
+            var teacher = await teacherRepository.GetTeacherWithTimeslotsById(request.TeacherId);
             var calendar = await calendarRepository.GetByIdAsync(request.CalendarId);
             var timeslot = new Timeslot(request.StartTime, request.EndTime, teacher, calendar);
             teacher.AddTimeslot(timeslot);

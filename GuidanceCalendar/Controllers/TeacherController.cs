@@ -1,4 +1,5 @@
 ﻿using GuidanceCalendar.Application.TeacherService.Commands.CreateTimeslot;
+using GuidanceCalendar.Application.TeacherService.Queries.GetAvailableTimeslots;
 using GuidanceCalendar.Application.TeacherService.Queries.GetTeachers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,20 +20,25 @@ namespace GuidanceCalendar.API.Controllers
             _mediator = mediator;
         }
         [HttpPost("{teacherId}/timeslot")]
-        public async Task<IActionResult> CreateTimeslot(CreateTimeslotCommand request)
+        public async Task<IActionResult> CreateTimeslot([FromBody]CreateTimeslotCommand request)
         {
             var response = await _mediator.Send(request);
             return Created("", new { Id = response.Id });
         }
         [HttpGet("{teacherId}/timeslot")]
-        public async Task<IActionResult> AvailableTimeslots(Guid teacherId)
+        public async Task<IActionResult> GetAvailableTimeslots(Guid teacherId)
         {
-            throw new NotImplementedException();
+            return Ok(await _mediator.Send(new GetAvailableTimeslotsQuery { TeacherId = teacherId }));
         }
         [HttpGet]
         public async Task<IActionResult> GetTeachers()
         {
             return Ok(await _mediator.Send(new GetTeachersQuery()));
+        }
+        [HttpGet("time")]
+        public async Task<IActionResult> Time()
+        {
+            return Ok(new { Time = DateTime.UtcNow });
         }
     }
 }
