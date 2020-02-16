@@ -11,11 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="StudentService\Commands\" />
-    <Folder Include="StudentService\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GuidanceCalendar.Domain\GuidanceCalendar.Domain.csproj" />
   </ItemGroup>
 
