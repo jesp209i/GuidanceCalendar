@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CalendarService\" />
     <Folder Include="StudentService\" />
     <Folder Include="TeacherService\" />
   </ItemGroup>
