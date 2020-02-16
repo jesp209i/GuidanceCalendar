@@ -9,13 +9,9 @@ namespace GuidanceCalendar.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class CalendarController : ControllerBase
     {
-        public void CreateBooking()
-        {
-
-        }
-        public void PlannedBookings()
+        public void AvailableCalendars()
         {
 
         }
