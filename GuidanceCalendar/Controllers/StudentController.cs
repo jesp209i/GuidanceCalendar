@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GuidanceCalendar.Application.StudentService.Commands.CreateBooking;
+using GuidanceCalendar.Application.StudentService.Queries.GetBookingHistory;
+using GuidanceCalendar.Application.StudentService.Queries.GetStudents;
+using GuidanceCalendar.Application.StudentService.Queries.UpcommingBookings;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,15 +16,30 @@ namespace GuidanceCalendar.API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        [HttpPost]
-        public async Task<IActionResult> CreateBooking()
+        private readonly IMediator _mediator;
+        public StudentController(IMediator mediator)
         {
-            throw new NotImplementedException();
+            _mediator = mediator;
+        }
+        [HttpPost("{studentId}")]
+        public async Task<IActionResult> CreateBooking([FromBody]CreateBookingCommand request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+        [HttpGet("{studentId}")]
+        public async Task<IActionResult> UpcommingBookings([FromRoute]UpcommingBookingsQuery request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+        [HttpGet("{studentId}/history")]
+        public async Task<IActionResult> UpcommingBookings([FromRoute]GetBookingHistoryQuery request)
+        {
+            return Ok(await _mediator.Send(request));
         }
         [HttpGet]
-        public async Task<IActionResult> PlannedBookings()
+        public async Task<IActionResult> GetStudents()
         {
-            throw new NotImplementedException();
+            return Ok(await _mediator.Send(new GetStudentsQuery()));
         }
     }
 }
