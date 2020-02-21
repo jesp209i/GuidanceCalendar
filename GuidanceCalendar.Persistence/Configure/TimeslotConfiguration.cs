@@ -1,4 +1,4 @@
-﻿using GuidanceCalendar.Domain;
+﻿using GuidanceCalendar.Persistence.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,10 +7,11 @@ using System.Text;
 
 namespace GuidanceCalendar.Persistence.Configure
 {
-    public class TimeslotConfiguration : IEntityTypeConfiguration<Timeslot>
+    public class TimeslotConfiguration : IEntityTypeConfiguration<TimeslotDao>
     {
-        public void Configure(EntityTypeBuilder<Timeslot> builder)
+        public void Configure(EntityTypeBuilder<TimeslotDao> builder)
         {
+            builder.ToTable("Timeslot");
             builder.HasKey(ts => ts.Id);
             builder.HasOne(ts => ts.TimeslotOwner)
                 .WithMany(t => t.AvailableTimeslots)

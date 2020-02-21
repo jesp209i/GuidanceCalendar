@@ -1,14 +1,14 @@
 ﻿
 using GuidanceCalendar.Persistence.DAO;
+using GuidanceCalendar.Persistence.DAO.Common;
 using System;
 
 namespace GuidanceCalendar.Persistence.DAO
 {
-    public class BookingDao
+    public class BookingDao : AbstractEntityDao
     {
-        public Guid Id { get; set; }
-        DateTimeOffset StartTime { get; set; }
-        DateTimeOffset EndTime { get; set; }
+        public DateTimeOffset StartTime { get; set; }
+        public DateTimeOffset EndTime { get; set; }
         public StudentDao BookedBy { get; set; }
     }
 }

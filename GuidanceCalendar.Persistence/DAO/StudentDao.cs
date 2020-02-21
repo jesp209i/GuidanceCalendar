@@ -1,15 +1,11 @@
-﻿using GuidanceCalendar.Peristence.DAO;
-using System;
+﻿using GuidanceCalendar.Persistence.DAO.Common;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GuidanceCalendar.Persistence.DAO
 {
-    public class StudentDao
+    public class StudentDao : AbstractEntityDao
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public ICollection<BookingDao> Bookings { get; set; }
-
     }
 }

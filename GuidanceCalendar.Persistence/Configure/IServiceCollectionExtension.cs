@@ -1,4 +1,4 @@
-﻿using GuidanceCalendar.Domain.Interfaces.Persistence;
+﻿using GuidanceCalendar.Ports.Out.Interfaces.Persistence;
 using GuidanceCalendar.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
