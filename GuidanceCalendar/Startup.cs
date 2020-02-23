@@ -1,3 +1,4 @@
+using GuidanceCalendar.API.Adapter;
 using GuidanceCalendar.Application.Configure;
 using GuidanceCalendar.Persistence;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,7 @@ namespace GuidanceCalendar
                     Title = "GuidanceCalendarApi",
                     Version = "v1"
                 }));
+            services.AddTransient<ViewmodelAdapter>();
             services.AddControllers();
         }
 
