@@ -15,9 +15,9 @@ namespace GuidanceCalendar.Domain
             Name = name;
             Description = description;
         }
-        public Calendar()
+        public static Calendar Create(Guid id, string name, string description)
         {
-
+            return new Calendar(name, description) { Id = id };
         }
     }
 }

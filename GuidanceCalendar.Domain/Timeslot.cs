@@ -11,10 +11,7 @@ namespace GuidanceCalendar.Domain
         public ICollection<Booking> Bookings { get; private set; }
         public Teacher TimeslotOwner { get; private set; }
         public Calendar Calendar { get; set; }
-        public Timeslot()
-        {
 
-        }
         public Timeslot(DateTimeOffset startTime, DateTimeOffset endTime, Teacher owner, Calendar calendar)
         {
             Bookings = new List<Booking>();
@@ -33,6 +30,11 @@ namespace GuidanceCalendar.Domain
             }
             booking.BookedBy.AddBooking(booking);
             Bookings.Add(booking);
+        }
+
+        public static Timeslot Create(Guid id, DateTime startTime, DateTime endTime, Teacher teacher)
+        {
+            return new Timeslot(startTime, endTime, teacher, null) { Id = id };
         }
     }
 }
