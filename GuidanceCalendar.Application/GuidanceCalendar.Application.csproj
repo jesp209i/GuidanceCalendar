@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GuidanceCalendar.Domain\GuidanceCalendar.Domain.csproj" />
+    <ProjectReference Include="..\GuidanceCalendar.Persistence\GuidanceCalendar.Persistence.csproj" />
+    <ProjectReference Include="..\GuidanceCalendar.Ports\GuidanceCalendar.Ports.csproj" />
   </ItemGroup>
 
 </Project>
