@@ -6,8 +6,10 @@ namespace GuidanceCalendar.Persistence.DAO
 {
     public class TimeslotDao : AbstractEntityDao
     {
-        public ICollection<BookingDao> Bookings { get; private set; }
-        public TeacherDao TimeslotOwner { get; private set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public ICollection<BookingDao> Bookings { get; set; }
+        public TeacherDao TimeslotOwner { get; set; }
         public CalendarDao Calendar { get; set; }
     }
 }

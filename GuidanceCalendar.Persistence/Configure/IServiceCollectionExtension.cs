@@ -1,11 +1,8 @@
-﻿using GuidanceCalendar.Ports.Out.Interfaces.Persistence;
+﻿using GuidanceCalendar.Persistence.Interfaces;
 using GuidanceCalendar.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GuidanceCalendar.Persistence
 {
@@ -22,6 +19,7 @@ namespace GuidanceCalendar.Persistence
             services.AddScoped<IBookingRepository, BookingRepository >();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+
 
             return services;
         }
