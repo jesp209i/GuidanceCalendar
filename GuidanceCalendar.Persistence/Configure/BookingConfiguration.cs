@@ -1,4 +1,4 @@
-﻿using GuidanceCalendar.Domain;
+﻿using GuidanceCalendar.Persistence.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,10 +7,11 @@ using System.Text;
 
 namespace GuidanceCalendar.Persistence.Configure
 {
-    public class BookingConfiguration : IEntityTypeConfiguration<Booking>
+    public class BookingConfiguration : IEntityTypeConfiguration<BookingDao>
     {
-        public void Configure(EntityTypeBuilder<Booking> builder)
+        public void Configure(EntityTypeBuilder<BookingDao> builder)
         {
+            builder.ToTable("Booking");
             builder.HasKey(b => b.Id);
             builder.HasOne(b => b.BookedBy)
                 .WithMany(s => s.Bookings);

@@ -1,13 +1,9 @@
-﻿using GuidanceCalendar.Domain;
-using GuidanceCalendar.Domain.Interfaces.Persistence;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GuidanceCalendar.Persistence.DAO;
+using GuidanceCalendar.Persistence.Interfaces;
 
 namespace GuidanceCalendar.Persistence.Repositories
 {
-    public class CalendarRepository : BaseRepository<Calendar>, ICalendarRepository
+    public class CalendarRepository : BaseRepository<CalendarDao>, ICalendarRepository
     {
         public CalendarRepository(GuidanceCalendarContext dbContext) : base(dbContext)
         {

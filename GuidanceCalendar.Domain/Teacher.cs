@@ -1,7 +1,6 @@
 ﻿using GuidanceCalendar.Domain.Common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GuidanceCalendar.Domain
 {
@@ -16,6 +15,7 @@ namespace GuidanceCalendar.Domain
             AvailableTimeslots = new List<Timeslot>();
             Calendars = new List<Calendar>();
         }
+        public static Teacher Create(Guid id, string name) => new Teacher(name) { Id = id };
         public void AddTimeslot(Timeslot timeslot)
         {
             OverlapGuard(timeslot);
@@ -27,10 +27,6 @@ namespace GuidanceCalendar.Domain
             {
                 ts.OverlapGuard(timeslot);
             }
-        }
-        public Teacher()
-        {
-
         }
     }
 }

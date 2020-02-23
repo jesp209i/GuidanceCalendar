@@ -1,15 +1,13 @@
-﻿using GuidanceCalendar.Domain.Common;
-using GuidanceCalendar.Domain.Interfaces.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using GuidanceCalendar.Persistence;
+using GuidanceCalendar.Persistence.DAO.Common;
+using GuidanceCalendar.Persistence.Interfaces;
 
 namespace GuidanceCalendar.Persistence.Repositories
 {
-    public abstract class BaseRepository<T> : IRepository<T> where T : Entity
+    public abstract class BaseRepository<T> : IRepository<T> where T : AbstractEntityDao
     {
         private readonly GuidanceCalendarContext dbContext;
         protected DbSet<T> dbSet;

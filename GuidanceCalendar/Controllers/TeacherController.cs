@@ -1,11 +1,7 @@
-﻿using GuidanceCalendar.Application.TeacherService.Commands.CreateTimeslot;
-using GuidanceCalendar.Application.TeacherService.Queries.GetAvailableTimeslots;
-using GuidanceCalendar.Application.TeacherService.Queries.GetTeachers;
-using MediatR;
+﻿using GuidanceCalendar.API.Adapter;
+using GuidanceCalendar.Ports.In.Interfaces.Application;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GuidanceCalendar.API.Controllers
@@ -14,27 +10,42 @@ namespace GuidanceCalendar.API.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
-        private IMediator _mediator;
-        public TeacherController(IMediator mediator)
+        private readonly ITeacherService _teacherService;
+        private readonly ViewmodelAdapter _viewmodelAdapter;
+
+        public TeacherController(ITeacherService teacherService, ViewmodelAdapter viewmodelAdapter)
         {
-            _mediator = mediator;
+            _teacherService = teacherService;
+            _viewmodelAdapter = viewmodelAdapter;
         }
         [HttpPost("{teacherId}/timeslot")]
-        public async Task<IActionResult> CreateTimeslot([FromBody]CreateTimeslotCommand request)
+        public async Task<IActionResult> CreateTimeslot(
+            [FromBody]Guid teacherId, 
+            [FromBody]Guid calendarId, 
+            [FromBody]DateTimeOffset startTime, 
+            [FromBody]DateTimeOffset endTime)
         {
-            var response = await _mediator.Send(request);
-            return Created("", new { Id = response.Id });
+            var response = await _teacherService.CreateTimeslot(teacherId, calendarId, startTime, endTime);
+            return Created("", new { Id = response });
         }
         [HttpGet("{teacherId}/timeslot")]
         public async Task<IActionResult> GetAvailableTimeslots(Guid teacherId)
         {
-            return Ok(await _mediator.Send(new GetAvailableTimeslotsQuery { TeacherId = teacherId }));
+            var timeslots = await _teacherService.GetAvailableTimeslotsByTeacherId(teacherId);
+            var response = _viewmodelAdapter.ConvertToTimeslotsDTO(timeslots);
+            return Ok(response);
         }
         [HttpGet]
         public async Task<IActionResult> GetTeachers()
         {
-            return Ok(await _mediator.Send(new GetTeachersQuery()));
+            var teachers = await _teacherService.GetTeachers();
+            var response = _viewmodelAdapter.ConvertToTeachersDTO(teachers);
+            return Ok(response);
         }
+
+
+        // This can safely be deleted!
+        // Used to get a valid timestamp for manual testing purposes
         [HttpGet("time")]
         public async Task<IActionResult> Time()
         {

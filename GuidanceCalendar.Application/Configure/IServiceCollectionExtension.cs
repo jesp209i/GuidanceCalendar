@@ -1,6 +1,10 @@
-﻿using MediatR;
+﻿using GuidanceCalendar.Ports.In.Interfaces.Application;
+using GuidanceCalendar.Application.Port.In;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using GuidanceCalendar.Application.Port.Out;
+using GuidanceCalendar.Ports.Out;
 
 namespace GuidanceCalendar.Application.Configure
 {
@@ -8,6 +12,9 @@ namespace GuidanceCalendar.Application.Configure
     {
         public static IServiceCollection AddApplicationConfiguration(this IServiceCollection services)
         {
+            services.AddTransient<ITeacherPersistencePort, TeacherPersistencePort>();
+            services.AddTransient<ICalendarPersistencePort, CalendarPersistencePort>();
+            services.AddTransient<ITeacherService, TeacherService>();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             return services;
         }
