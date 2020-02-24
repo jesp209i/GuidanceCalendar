@@ -1,4 +1,5 @@
 ﻿using GuidanceCalendar.API.Adapter;
+using GuidanceCalendar.API.Viewmodels.Commands;
 using GuidanceCalendar.Ports.In.Interfaces.Application;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,13 +20,9 @@ namespace GuidanceCalendar.API.Controllers
             _viewmodelAdapter = viewmodelAdapter;
         }
         [HttpPost("{teacherId}/timeslot")]
-        public async Task<IActionResult> CreateTimeslot(
-            [FromBody]Guid teacherId, 
-            [FromBody]Guid calendarId, 
-            [FromBody]DateTimeOffset startTime, 
-            [FromBody]DateTimeOffset endTime)
+        public async Task<IActionResult> CreateTimeslot([FromBody] CreateTimeslotCommand request)
         {
-            var response = await _teacherService.CreateTimeslot(teacherId, calendarId, startTime, endTime);
+            var response = await _teacherService.CreateTimeslot(request.TeacherId, request.CalendarId, request.StartTime, request.EndTime);
             return Created("", new { Id = response });
         }
         [HttpGet("{teacherId}/timeslot")]

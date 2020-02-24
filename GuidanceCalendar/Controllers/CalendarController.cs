@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using GuidanceCalendar.API.Viewmodels.Commands;
 using GuidanceCalendar.Ports.In.Interfaces.Application;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,10 +22,11 @@ namespace GuidanceCalendar.API.Controllers
             //return Ok(await _calendarService.Send(new AvaliableCalendarsRequest()));
         }
         [HttpPost]
-        public async Task<IActionResult> CreateCalendar(string name, string description)
+        public async Task<IActionResult> CreateCalendar([FromBody]CreateCalendarCommand request)
         {
-            var response = await _calendarService.CreateCalendar(name, description);
-            return Created("", new { Id = response });
+            //var response = await _calendarService.CreateCalendar(name, description);
+            //return Created("", new { Id = response });
+            return Ok(request);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCalendar(Guid id)
