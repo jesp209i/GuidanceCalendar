@@ -8,10 +8,14 @@ namespace GuidanceCalendar.Persistence.DAO
 {
     public class TeacherDao : AbstractEntityDao
     {
-        public DateTimeOffset StartTime { get; set; }
-        public DateTimeOffset EndTime { get; set; }
+        
         public string Name { get; private set; }
         public ICollection<TimeslotDao> AvailableTimeslots { get; set; }
-        public ICollection<CalendarDao> Calendars { get; set; }        
+        public ICollection<CalendarDao> Calendars { get; set; }
+        public TeacherDao()
+        {
+            AvailableTimeslots = new List<TimeslotDao>();
+            Calendars = new List<CalendarDao>();
+        }
     }
 }
