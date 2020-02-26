@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using GuidanceCalendar.API.Mapper;
 using GuidanceCalendar.API.Viewmodels.Commands;
-using GuidanceCalendar.Ports.In.Interfaces.Application;
+using GuidanceCalendar.Ports.In.Application;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuidanceCalendar.API.Controllers
@@ -11,29 +12,29 @@ namespace GuidanceCalendar.API.Controllers
     public class CalendarController : ControllerBase
     {
         private readonly  ICalendarService _calendarService;
-        public CalendarController(ICalendarService calendarService)
+        private readonly ViewmodelMapper _viewmodelMapper;
+
+        public CalendarController(ICalendarService calendarService, ViewmodelMapper viewmodelMapper)
         {
             _calendarService = calendarService;
+            _viewmodelMapper = viewmodelMapper;
         }
         [HttpGet]
         public async Task<IActionResult> AvailableCalendars()
         {
-            throw new NotImplementedException();
-            //return Ok(await _calendarService.Send(new AvaliableCalendarsRequest()));
+            var calendars = await _calendarService.GetAvailableCalendars();
+            return Ok(_viewmodelMapper.ConvertToCalendarListDTO(calendars));
         }
         [HttpPost]
         public async Task<IActionResult> CreateCalendar([FromBody]CreateCalendarCommand request)
         {
-            //var response = await _calendarService.CreateCalendar(name, description);
-            //return Created("", new { Id = response });
-            return Ok(request);
+            var response = await _calendarService.CreateCalendar(request.Name, request.Description);
+            return Created("", new { Id = response });
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCalendar(Guid id)
         {
-            throw new NotImplementedException();
-            //return Ok(new { Id = id });
-            //return Ok(await _calendarService.Send(new GetCalendarQuery { Id = id }));
+            return Ok(await _calendarService.GetCalendar(id));
         }
     }
 }

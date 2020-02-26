@@ -1,6 +1,6 @@
-﻿using GuidanceCalendar.API.Adapter;
+﻿using GuidanceCalendar.API.Mapper;
 using GuidanceCalendar.API.Viewmodels.Commands;
-using GuidanceCalendar.Ports.In.Interfaces.Application;
+using GuidanceCalendar.Ports.In.Application;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -12,12 +12,12 @@ namespace GuidanceCalendar.API.Controllers
     public class TeacherController : ControllerBase
     {
         private readonly ITeacherService _teacherService;
-        private readonly ViewmodelAdapter _viewmodelAdapter;
+        private readonly ViewmodelMapper _viewmodelMapper;
 
-        public TeacherController(ITeacherService teacherService, ViewmodelAdapter viewmodelAdapter)
+        public TeacherController(ITeacherService teacherService, ViewmodelMapper viewmodelMapper)
         {
             _teacherService = teacherService;
-            _viewmodelAdapter = viewmodelAdapter;
+            _viewmodelMapper = viewmodelMapper;
         }
         [HttpPost("{teacherId}/timeslot")]
         public async Task<IActionResult> CreateTimeslot([FromBody] CreateTimeslotCommand request)
@@ -29,14 +29,14 @@ namespace GuidanceCalendar.API.Controllers
         public async Task<IActionResult> GetAvailableTimeslots(Guid teacherId)
         {
             var timeslots = await _teacherService.GetAvailableTimeslotsByTeacherId(teacherId);
-            var response = _viewmodelAdapter.ConvertToTimeslotsDTO(timeslots);
+            var response = _viewmodelMapper.ConvertToTimeslotsDTO(timeslots);
             return Ok(response);
         }
         [HttpGet]
         public async Task<IActionResult> GetTeachers()
         {
             var teachers = await _teacherService.GetTeachers();
-            var response = _viewmodelAdapter.ConvertToTeachersDTO(teachers);
+            var response = _viewmodelMapper.ConvertToTeachersDTO(teachers);
             return Ok(response);
         }
 
