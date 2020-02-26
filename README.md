@@ -9,3 +9,4 @@ Gammelt eksempel kan ses i branchen "OldMaster"
 - fjern MediatR fra Application-laget
 - den overordnede struktur kan godt være strammere
 - pænere interface mellem application og persistence
+- Kan man lave pænere (og smartere) mapnings (uden brug af automapper)
