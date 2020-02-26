@@ -6,7 +6,7 @@ using GuidanceCalendar.Application.UseCases.Teacher.Commands.CreateTimeslot;
 using GuidanceCalendar.Application.UseCases.Teacher.Queries.GetAvailableTimeslots;
 using GuidanceCalendar.Application.UseCases.Teacher.Queries.GetTeachers;
 using GuidanceCalendar.Domain;
-using GuidanceCalendar.Ports.In.Interfaces.Application;
+using GuidanceCalendar.Ports.In.Application;
 using MediatR;
 
 namespace GuidanceCalendar.Application.Port.In

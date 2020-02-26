@@ -1,10 +1,10 @@
-﻿using GuidanceCalendar.Ports.In.Interfaces.Application;
+﻿using GuidanceCalendar.Ports.In.Application;
 using GuidanceCalendar.Application.Port.In;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using GuidanceCalendar.Application.Port.Out;
-using GuidanceCalendar.Ports.Out;
+using GuidanceCalendar.Ports.Out.Persistence;
 
 namespace GuidanceCalendar.Application.Configure
 {

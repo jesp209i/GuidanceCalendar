@@ -1,7 +1,7 @@
 ﻿using GuidanceCalendar.Domain;
 using GuidanceCalendar.Persistence.DAO;
 using GuidanceCalendar.Persistence.Interfaces;
-using GuidanceCalendar.Ports.Out;
+using GuidanceCalendar.Ports.Out.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

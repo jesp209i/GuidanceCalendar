@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using GuidanceCalendar.Domain;
 using GuidanceCalendar.Persistence.DAO;
 using GuidanceCalendar.Persistence.Interfaces;
-using GuidanceCalendar.Ports.Out;
+using GuidanceCalendar.Ports.Out.Persistence;
 
 namespace GuidanceCalendar.Application.Port.Out
 {
