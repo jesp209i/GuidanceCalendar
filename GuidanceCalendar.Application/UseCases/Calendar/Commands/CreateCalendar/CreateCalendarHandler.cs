@@ -1,10 +1,6 @@
-﻿using GuidanceCalendar.Domain;
-using GuidanceCalendar.Persistence.Interfaces;
-using GuidanceCalendar.Ports.Out;
+﻿using GuidanceCalendar.Ports.Out.Persistence;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

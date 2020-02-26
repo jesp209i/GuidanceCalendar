@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GuidanceCalendar.Domain;
-using GuidanceCalendar.Ports.Out;
+using GuidanceCalendar.Ports.Out.Persistence;
 
 namespace GuidanceCalendar.Application.UseCases.Teacher.Queries.GetAvailableTimeslots
 {

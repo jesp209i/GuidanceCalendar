@@ -1,5 +1,5 @@
 ﻿using GuidanceCalendar.Domain;
-using GuidanceCalendar.Ports.Out;
+using GuidanceCalendar.Ports.Out.Persistence;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;

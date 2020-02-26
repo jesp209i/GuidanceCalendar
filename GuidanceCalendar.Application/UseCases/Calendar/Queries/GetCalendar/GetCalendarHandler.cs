@@ -1,13 +1,10 @@
-﻿using GuidanceCalendar.Ports.Out;
+﻿using GuidanceCalendar.Ports.Out.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 namespace GuidanceCalendar.Application.UseCases.Calendar.Queries.GetCalendar
 {
-    public class GetCalendarHandler : IRequestHandler<GetCalendarQuery, GetCalendarResponse>
+    public class GetCalendarHandler : IRequestHandler<GetCalendarQuery, Domain.Calendar>
     {
         private readonly ICalendarPersistencePort _cpp;
 
@@ -15,10 +12,9 @@ namespace GuidanceCalendar.Application.UseCases.Calendar.Queries.GetCalendar
         {
             _cpp = cpp;
         }
-        public async Task<GetCalendarResponse> Handle(GetCalendarQuery request, CancellationToken cancellationToken)
+        public async Task<Domain.Calendar> Handle(GetCalendarQuery request, CancellationToken cancellationToken)
         {
-            var calendar = await _cpp.GetByIdAsync(request.Id);
-            return new GetCalendarResponse { Id = calendar.Id, Description = calendar.Description, Name = calendar.Name };
+            return await _cpp.GetByIdAsync(request.Id);
         }
     }
 }

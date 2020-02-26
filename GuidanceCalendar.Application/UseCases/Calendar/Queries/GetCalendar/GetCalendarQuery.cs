@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GuidanceCalendar.Application.UseCases.Calendar.Queries.GetCalendar
 {
-    public class GetCalendarQuery : IRequest<GetCalendarResponse>
+    public class GetCalendarQuery : IRequest<Domain.Calendar>
     {
         public Guid Id { get; set; }
     }
