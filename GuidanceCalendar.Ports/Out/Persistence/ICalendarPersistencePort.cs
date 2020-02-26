@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GuidanceCalendar.Ports.Out
+namespace GuidanceCalendar.Ports.Out.Persistence
 {
     public interface ICalendarPersistencePort
     {

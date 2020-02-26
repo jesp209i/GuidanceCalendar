@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GuidanceCalendar.Ports.In.Interfaces.Application
+namespace GuidanceCalendar.Ports.In.Application
 {
     interface IStudentServices
     {

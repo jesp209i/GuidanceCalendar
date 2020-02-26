@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuidanceCalendar.Ports.In.Interfaces.Application
+namespace GuidanceCalendar.Ports.In.Application
 {
     public interface ITimeslotServices
     {
