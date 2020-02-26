@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GuidanceCalendar.API.Adapter
+namespace GuidanceCalendar.API.Mapper
 {
-    public class ViewmodelAdapter
+    public class ViewmodelMapper
     {
         internal object ConvertToTimeslotsDTO(ICollection<Timeslot> timeslots)
         {
@@ -21,6 +21,13 @@ namespace GuidanceCalendar.API.Adapter
             List<TeacherVM> vmTeachers = new List<TeacherVM>();
             teachers.ToList().ForEach(x => vmTeachers.Add(new TeacherVM { Name = x.Name, Id = x.Id }));
             return vmTeachers;
+        }
+
+        internal object ConvertToCalendarListDTO(ICollection<Calendar> calendars)
+        {
+            List<CalendarVM> vmCalendars = new List<CalendarVM>();
+            calendars.ToList().ForEach(x => vmCalendars.Add(new CalendarVM { Id = x.Id, Name = x.Name, Description = x.Description }));
+            return vmCalendars;
         }
     }
 }
